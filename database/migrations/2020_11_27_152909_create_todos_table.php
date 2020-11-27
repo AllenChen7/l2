@@ -18,7 +18,7 @@ class CreateTodosTable extends Migration
             $table->string('title')->comment('标题');
             $table->unsignedInteger('user_id')->comment('用户id')->index();
             $table->string('desc')->comment('描述');
-            $table->timestamp('endTime')->default(0)->comment('完成时间');
+            $table->unsignedInteger('endTime')->default(0)->comment('完成时间')->index();
             $table->boolean('status')->default(false)->comment('完成状态');
             $table->timestamps();
         });

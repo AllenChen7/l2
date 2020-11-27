@@ -48,3 +48,5 @@ Route::get('permission-denied', 'PagesController@permissionDenied')->name('permi
 
 // todo
 Route::get('todo', 'TodoController@index')->name('todo');
+Route::post('todo/store', 'TodoController@store')->name('todo.store');
+Route::get('todo/create', 'TodoController@create')->name('todo.create');
