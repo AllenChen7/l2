@@ -96,6 +96,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function setAvatarAttribute($path)
     {
+        if (!$path) {
+            $path = 'https://cdn.learnku.com/uploads/images/201710/14/1/s5ehp11z6s.png';
+        }
+
         // 如果不是 `http` 子串开头，那就是从后台上传的，需要补全 URL
         if ( ! \Str::startsWith($path, 'http')) {
 
@@ -104,5 +108,14 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
         $this->attributes['avatar'] = $path;
+    }
+
+    public function getAvatarAttribute($value)
+    {
+        if (!$value) {
+            $value = 'https://cdn.learnku.com/uploads/images/201710/14/1/s5ehp11z6s.png';
+        }
+
+        return $value;
     }
 }
