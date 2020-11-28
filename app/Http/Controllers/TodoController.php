@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => []]);
+    }
+
     public function index(Todo $todo)
     {
         $todo = $todo->with('user')->orderByDesc('id')->paginate(20);
@@ -27,5 +32,27 @@ class TodoController extends Controller
     public function create(Todo $todo)
     {
         return view('todo.create', compact('todo'));
+    }
+
+    public function done(Request $request)
+    {
+        $todo = Todo::find($request->post('id'));
+
+        if ($todo) {
+            $todo->status = true;
+            $todo->endTime = time();
+
+            if ($todo->save()) {
+                return response()->json([
+                    'status' => 1,
+                    'msg' => '已完成'
+                ]);
+            }
+        }
+
+        return response()->json([
+            'status' => 0,
+            'msg' => '处理失败，请重试'
+        ]);
     }
 }

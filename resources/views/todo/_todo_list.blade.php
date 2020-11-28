@@ -14,8 +14,8 @@
             <a href="{{ $topic->link() }}" title="{{ $topic->title }}">
               {{ $topic->title }}
             </a>
-            <a class="float-right" href=":;">
-              <input type="checkbox">
+            <a class="float-right" href="#" onclick="checkDone({{ $topic->id  }})">
+              <input type="checkbox" @if ($topic->status) checked disabled @endif  id="checkbox_{{ $topic->id  }}">
             </a>
           </div>
 
@@ -45,3 +45,28 @@
 @else
   <div class="empty-block">暂无数据 ~_~ </div>
 @endif
+
+<script>
+  function checkDone(id) {
+    console.log(id)
+    var data = {
+      id: id,
+      _token: "{{ csrf_token() }}"
+    }
+    $.ajax({
+      type: "POST",
+      url: "{{ route('todo.done')  }}",
+      data: data,
+      success: function(data){
+        console.log(data)
+        if (data.status) {
+          alert(data.msg)
+          $('#checkbox_' + id).attr('disabled', 'disabled')
+        } else {
+          $('#checkbox_' + id).removeAttr('checked')
+          alert(data.msg)
+        }
+      }
+    });
+  }
+</script>
