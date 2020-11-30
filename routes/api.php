@@ -23,6 +23,10 @@ Route::prefix('v1')
     ->name('api.v1.')
     ->group(function () {
 
+        // 图片验证码
+        Route::post('captchas', 'CaptchasController@store')
+            ->name('captchas.store');
+        // 短信验证码
         Route::middleware('throttle:' . config('api.rate_limits.sign'))
             ->group(function () {
                 // 短信验证码
