@@ -41,7 +41,7 @@
 
                   <div class="form-group">
                     <label for="name-field">期望结束时间</label>
-                    <input class="form-control" type="text" name="plan_end_time" value="{{ old('title', $todo->plan_end_time ) }}" placeholder="" required />
+                    <input class="form-control" type="text" name="plan_end_time" id="plan_end_time" value="{{ old('title', $todo->plan_end_time ) }}" placeholder="" required />
                   </div>
 
                   <div class="form-group">
@@ -135,5 +135,6 @@
     // 绑定事件
     // map.on('click', clickHandler);
     $("#plan_start_time").datetimePicker();
+    $("#plan_end_time").datetimePicker();
   </script>
 @stop

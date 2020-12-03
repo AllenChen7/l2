@@ -26,7 +26,7 @@ class TodoController extends Controller
         $todo->user_id = Auth::id();
         $todo->save();
 
-        return redirect()->to($todo->link())->with('success', '成功添加 TODO！');
+        return redirect()->to('todo')->with('success', '成功添加 TODO！');
     }
 
     public function create(Todo $todo)
