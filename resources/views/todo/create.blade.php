@@ -95,7 +95,7 @@
       keyboardEnable: false
     };
 
-    if ({{$todo->longitude && $todo->latitude}}) {
+    if ('{{$todo->longitude && $todo->latitude}}') {
       mparams = {
         resizeEnable: true,
         center: [{{$todo->longitude}}, {{$todo->latitude}}],//地图中心点
