@@ -34,6 +34,20 @@ class TodoController extends Controller
         return view('todo.create', compact('todo'));
     }
 
+    public function edit(Todo $todo)
+    {
+//        $this->authorize('update', $topic);
+        return view('todo.create', compact('todo'));
+    }
+
+    public function update(TodoRequest $request, Todo $todo)
+    {
+//        $this->authorize('update', $topic);
+        $todo->update($request->all());
+
+        return redirect()->to('todo')->with('success', 'TODO 修改成功！');
+    }
+
     public function done(Request $request)
     {
         $todo = Todo::find($request->post('id'));

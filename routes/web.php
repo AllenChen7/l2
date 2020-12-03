@@ -47,7 +47,10 @@ Route::resource('notifications', 'NotificationsController', ['only' => ['index']
 Route::get('permission-denied', 'PagesController@permissionDenied')->name('permission-denied');
 
 // todo
-Route::get('todo', 'TodoController@index')->name('todo');
-Route::post('todo/store', 'TodoController@store')->name('todo.store');
-Route::get('todo/create', 'TodoController@create')->name('todo.create');
+//Route::get('todo', 'TodoController@index')->name('todo');
+//Route::post('todo/store', 'TodoController@store')->name('todo.store');
+//Route::get('todo/create', 'TodoController@create')->name('todo.create');
 Route::post('todo/done', 'TodoController@done')->name('todo.done');
+//Route::get('todo/edit', 'TodoController@edit')->name('todo.edit');
+
+Route::resource('todo', 'TodoController', ['only' => ['index', 'create', 'store', 'edit', 'update']]);
