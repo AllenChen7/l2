@@ -41,24 +41,25 @@
 
                   <div class="form-group">
                     <label for="name-field">期望开始时间</label>
-                    <input class="form-control" type="text" name="plan_start_time" id='plan_start_time' value="{{ old('title', $todo->plan_start_time ) }}" placeholder="" required />
+                    <input class="form-control" type="text" name="plan_start_time" id='plan_start_time' value="{{ old('plan_start_time', $todo->plan_start_time ) }}" placeholder="" required />
                   </div>
 
                   <div class="form-group">
                     <label for="name-field">期望结束时间</label>
-                    <input class="form-control" type="text" name="plan_end_time" id="plan_end_time" value="{{ old('title', $todo->plan_end_time ) }}" placeholder="" required />
+                    <input class="form-control" type="text" name="plan_end_time" id="plan_end_time" value="{{ old('plan_end_time', $todo->plan_end_time ) }}" placeholder="" required />
                   </div>
 
                   <div class="form-group">
                     <label for="name-field">期望去往地点</label>
-                    <input class="form-control" type="text" id="keyword" name="address" value="{{ old('title', $todo->address ) }}" onfocus='this.value=""' placeholder="请输入关键字：(选定后搜索)" required />
+                    <input class="form-control" type="text" id="keyword" name="address" value="{{ old('address', $todo->address ) }}" placeholder="请输入关键字：(选定后搜索)" required />
                   </div>
 
                   <div class="form-group">
 {{--                    <label for="name-field">请确认地址</label>--}}
-                    <input type="hidden" name="longitude" id="hlongitude" value="{{ old('title', $todo->longitude ) }}">
-                    <input type="hidden" name="latitude" id="hlatitude" value="{{ old('title', $todo->latitude ) }}">
+                    <input type="hidden" name="longitude" id="hlongitude" value="{{ old('longitude', $todo->longitude ) }}">
+                    <input type="hidden" name="latitude" id="hlatitude" value="{{ old('latitude', $todo->latitude ) }}">
 {{--                    <div id="mapContainer" style="height: 200px; position: unset;"></div>--}}
+                    <div id="dtCity"></div>
                   </div>
 
                   <div class="form-group mb-4">
@@ -104,12 +105,16 @@
     var marker = [];
     var mparams = {
       resizeEnable: true,
-      center: [116.397428, 39.90923],//地图中心点
       zoom: 13,//地图显示的缩放级别
       keyboardEnable: false
     };
 
     if ('{{$todo->longitude && $todo->latitude}}') {
+      var str = '<a class="btn btn-primary" style="width: 100%" href="https://uri.amap.com/marker?position=' + {{$todo->longitude}}
+        + ',' + {{$todo->latitude}}
+        + '&name=' + '{{$todo->address}}'
+        + '" role="button">在地图中打开</a>';
+      $('#dtCity').html(str)
       mparams = {
         resizeEnable: true,
         center: [{{$todo->longitude}}, {{$todo->latitude}}],//地图中心点
@@ -118,33 +123,34 @@
       };
     }
     var map = new AMap.Map("mapContainer", mparams);
-    AMap.plugin(['AMap.Autocomplete','AMap.PlaceSearch'],function(){
+    AMap.plugin(['AMap.Autocomplete'],function(){
       var autoOptions = {
         city: "北京", //城市，默认全国
         input: "keyword"//使用联想输入的input的id
       };
       autocomplete= new AMap.Autocomplete(autoOptions);
-      var placeSearch = new AMap.PlaceSearch({
-        city:'北京',
-        map:map
-      })
+      // var placeSearch = new AMap.PlaceSearch({
+      //   city:'北京',
+      //   map:map
+      // })
       AMap.event.addListener(autocomplete, "select", function(e){
         //TODO 针对选中的poi实现自己的功能
         // placeSearch.setCity(e.poi.adcode);
-        placeSearch.search(e.poi.name)
-        console.log(e.poi.location)
+        // placeSearch.search(e.poi.name)
+        // console.log(e.poi.location)
         var longitude = e.poi.location.lng
         var latitude = e.poi.location.lat
 
         $('#hlongitude').val(longitude)
         $('#hlatitude').val(latitude)
+
+        var str = '<a class="btn btn-primary" style="width: 100%" href="https://uri.amap.com/marker?position=' + longitude
+                  + ',' + latitude
+                  + '&name=' + e.poi.name
+                  + '" role="button">在地图中打开</a>';
+        $('#dtCity').html(str)
       });
     });
-
-    var clickHandler = function(e) {
-      console.log(e)
-      // alert('您在[ '+e.lnglat.getLng()+','+e.lnglat.getLat()+' ]的位置点击了地图！');
-    };
 
     // 绑定事件
     var myDate = new Date();
