@@ -148,7 +148,7 @@
 
     // 绑定事件
     var myDate = new Date();
-    var today = myDate.getFullYear() + '-' + myDate.getMonth() + '-' + myDate.getDay()
+    var today = myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getDate()
     // map.on('click', clickHandler);
     $("#plan_start_time").datetimePicker({
       min: today,
