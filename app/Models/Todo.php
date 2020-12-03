@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Todo extends Model
 {
     protected $fillable = ['title', 'desc', 'user_id', 'endTime', 'status', 'address',
-        'latitude', 'longitude', 'plan_end_time', 'plan_start_time'];
+        'latitude', 'longitude', 'plan_end_time', 'plan_start_time', 'image'];
 
     public function user()
     {

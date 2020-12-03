@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Handlers\ImageUploadHandler;
 use App\Http\Requests\TodoRequest;
 use App\Models\Todo;
 use Illuminate\Http\Request;
@@ -20,9 +21,17 @@ class TodoController extends Controller
         return view('todo.index', compact('todo'));
     }
 
-    public function store(TodoRequest $request, Todo $todo)
+    public function store(TodoRequest $request, Todo $todo, ImageUploadHandler $uploader)
     {
-        $todo->fill($request->all());
+        $data = $request->all();
+
+        if ($request->image) {
+            $result = $uploader->save($request->image, 'todos', 'todo', 416);
+            if ($result) {
+                $data['image'] = $result['path'];
+            }
+        }
+        $todo->fill($data);
         $todo->user_id = Auth::id();
         $todo->save();
 
@@ -40,10 +49,18 @@ class TodoController extends Controller
         return view('todo.create', compact('todo'));
     }
 
-    public function update(TodoRequest $request, Todo $todo)
+    public function update(TodoRequest $request, Todo $todo, ImageUploadHandler $uploader)
     {
 //        $this->authorize('update', $topic);
-        $todo->update($request->all());
+        $data = $request->all();
+
+        if ($request->image) {
+            $result = $uploader->save($request->image, 'todos', 'todo', 416);
+            if ($result) {
+                $data['image'] = $result['path'];
+            }
+        }
+        $todo->update($data);
 
         return redirect()->to('todo')->with('success', 'TODO 修改成功！');
     }

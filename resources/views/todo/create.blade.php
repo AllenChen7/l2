@@ -24,7 +24,7 @@
           <hr>
 
           @if($todo->id)
-            <form action="{{ route('todo.update', $todo->id) }}" method="POST" accept-charset="UTF-8">
+            <form action="{{ route('todo.update', $todo->id) }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
               <input type="hidden" name="_method" value="PUT">
               @else
                 <form action="{{ route('todo.store') }}" method="POST" accept-charset="UTF-8">
@@ -58,7 +58,16 @@
 {{--                    <label for="name-field">请确认地址</label>--}}
                     <input type="hidden" name="longitude" id="hlongitude" value="{{ old('title', $todo->longitude ) }}">
                     <input type="hidden" name="latitude" id="hlatitude" value="{{ old('title', $todo->latitude ) }}">
-                    <div id="mapContainer" style="height: 200px; position: unset;"></div>
+{{--                    <div id="mapContainer" style="height: 200px; position: unset;"></div>--}}
+                  </div>
+
+                  <div class="form-group mb-4">
+                    <label for="" class="avatar-label">图片</label>
+                    <input type="file" name="image" class="form-control-file">
+                    @if($todo->image)
+                      <br>
+                      <img class="thumbnail img-responsive" src="{{ $todo->image }}" width="200" />
+                    @endif
                   </div>
 
                   <div class="form-group">
@@ -138,8 +147,14 @@
     };
 
     // 绑定事件
+    var myDate = new Date();
+    var today = myDate.getFullYear() + '-' + myDate.getMonth() + '-' + myDate.getDay()
     // map.on('click', clickHandler);
-    $("#plan_start_time").datetimePicker();
-    $("#plan_end_time").datetimePicker();
+    $("#plan_start_time").datetimePicker({
+      min: today,
+    });
+    $("#plan_end_time").datetimePicker({
+      min: today,
+    });
   </script>
 @stop
