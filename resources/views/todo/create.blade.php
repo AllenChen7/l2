@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+  <style>
+    .footer {
+      position:unset;
+    }
+  </style>
 
   <div class="container" style="padding-right:unset; padding-left:unset;">
     <div class="col-md-12">
