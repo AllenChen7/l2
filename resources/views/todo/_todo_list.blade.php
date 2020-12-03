@@ -46,27 +46,44 @@
   <div class="empty-block">暂无数据 ~_~ </div>
 @endif
 
+@section('styles')
+  <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+@stop
+
+@section('scripts')
+  <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+@stop
+
 <script>
   function checkDone(id) {
     console.log(id)
-    var data = {
-      id: id,
-      _token: "{{ csrf_token() }}"
-    }
-    $.ajax({
-      type: "POST",
-      url: "{{ route('todo.done')  }}",
-      data: data,
-      success: function(data){
-        console.log(data)
-        if (data.status) {
-          alert(data.msg)
-          $('#checkbox_' + id).attr('disabled', 'disabled')
-        } else {
-          $('#checkbox_' + id).removeAttr('checked')
-          alert(data.msg)
-        }
+    $.confirm("确认已完成当前 TODO", function() {
+      //点击确认后的回调函数
+      var data = {
+        id: id,
+        _token: "{{ csrf_token() }}"
       }
+      $.ajax({
+        type: "POST",
+        url: "{{ route('todo.done')  }}",
+        data: data,
+        success: function(data){
+          console.log(data)
+          if (data.status) {
+            $.toast(data.msg)
+            $('#checkbox_' + id).attr('disabled', 'disabled')
+          } else {
+            $('#checkbox_' + id).removeAttr('checked')
+            $.toast(data.msg)
+          }
+        }
+      });
+    }, function() {
+      //点击取消后的回调函数
+      $('#checkbox_' + id).removeAttr('checked')
+      $.toast("已取消", "cancel");
     });
   }
 </script>
