@@ -45,13 +45,13 @@ class TodoController extends Controller
 
     public function edit(Todo $todo)
     {
-//        $this->authorize('update', $topic);
+        $this->authorize('update', $todo);
         return view('todo.create', compact('todo'));
     }
 
     public function update(TodoRequest $request, Todo $todo, ImageUploadHandler $uploader)
     {
-//        $this->authorize('update', $topic);
+        $this->authorize('update', $todo);
         $data = $request->all();
 
         if ($request->image) {
@@ -65,8 +65,9 @@ class TodoController extends Controller
         return redirect()->to('todo')->with('success', 'TODO 修改成功！');
     }
 
-    public function done(Request $request)
+    public function done(Request $request, Todo $todo)
     {
+        $this->authorize('update', $todo);
         $todo = Todo::find($request->post('id'));
 
         if ($todo) {
@@ -85,5 +86,18 @@ class TodoController extends Controller
             'status' => 0,
             'msg' => '处理失败，请重试'
         ]);
+    }
+
+    public function show(Todo $todo)
+    {
+        return view('todo.show', compact('todo'));
+    }
+
+    public function destroy(Todo $todo)
+    {
+        $this->authorize('destroy', $todo);
+        $todo->delete();
+
+        return redirect()->to('todo')->with('success', '成功删除！');
     }
 }

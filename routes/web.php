@@ -53,4 +53,4 @@ Route::get('permission-denied', 'PagesController@permissionDenied')->name('permi
 Route::post('todo/done', 'TodoController@done')->name('todo.done');
 //Route::get('todo/edit', 'TodoController@edit')->name('todo.edit');
 
-Route::resource('todo', 'TodoController', ['only' => ['index', 'create', 'store', 'edit', 'update']]);
+Route::resource('todo', 'TodoController', ['only' => ['index', 'create', 'store', 'edit', 'update', 'show', 'destroy']]);
