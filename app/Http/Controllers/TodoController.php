@@ -69,7 +69,6 @@ class TodoController extends Controller
 
     public function done(Request $request, Todo $todo)
     {
-        $this->authorize('update', $todo);
         $todo = Todo::find($request->post('id'));
 
         if ($todo) {

@@ -9,6 +9,10 @@ class TodoPolicy
 {
     public function update(User $user, Todo $topic)
     {
+        if ($topic->status) {
+            return false;
+        }
+
         return $user->isAuthorOf($topic);
     }
 
