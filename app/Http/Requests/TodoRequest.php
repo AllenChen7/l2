@@ -16,9 +16,9 @@ class TodoRequest extends Request
             {
                 return [
                     'title'       => 'required|min:2',
-                    'desc'        => 'required|min:3',
-                    'plan_start_time' => 'required',
-                    'plan_end_time' => 'required|after:plan_start_time',
+                    'desc'        => 'nullable|min:3',
+                    'plan_start_time' => 'nullable',
+                    'plan_end_time' => 'nullable|after:plan_start_time',
                 ];
             }
             case 'GET':

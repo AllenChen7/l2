@@ -41,17 +41,17 @@
 
                   <div class="form-group">
                     <label for="name-field">期望开始时间</label>
-                    <input class="form-control" type="text" name="plan_start_time" id='plan_start_time' value="{{ old('plan_start_time', $todo->plan_start_time ) }}" placeholder="" required />
+                    <input class="form-control" type="text" name="plan_start_time" id='plan_start_time' value="{{ old('plan_start_time', $todo->plan_start_time ) }}" placeholder="期望开始时间" />
                   </div>
 
                   <div class="form-group">
                     <label for="name-field">期望结束时间</label>
-                    <input class="form-control" type="text" name="plan_end_time" id="plan_end_time" value="{{ old('plan_end_time', $todo->plan_end_time ) }}" placeholder="" required />
+                    <input class="form-control" type="text" name="plan_end_time" id="plan_end_time" value="{{ old('plan_end_time', $todo->plan_end_time ) }}" placeholder="期望结束时间" />
                   </div>
 
                   <div class="form-group">
                     <label for="name-field">期望去往地点</label>
-                    <input class="form-control" type="text" id="keyword" name="address" value="{{ old('address', $todo->address ) }}" placeholder="请输入关键字：(选定后搜索)" required />
+                    <input class="form-control" type="text" id="keyword" name="address" value="{{ old('address', $todo->address ) }}" placeholder="请输入关键字：(选定后搜索)" />
                   </div>
 
                   <div class="form-group">
@@ -73,7 +73,7 @@
 
                   <div class="form-group">
                     <label for="name-field">备注</label>
-                    <textarea name="desc" class="form-control" rows="6" placeholder="请填入至少三个字符的备注。" required>{{ old('desc', $todo->desc ) }}</textarea>
+                    <textarea name="desc" class="form-control" rows="6" placeholder="备注">{{ old('desc', $todo->desc ) }}</textarea>
                   </div>
 
                   <div class="well well-sm">
