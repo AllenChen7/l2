@@ -67,9 +67,11 @@
           @can('update', $todo)
             <div class="operate">
               <hr>
-              <a href="{{ route('todo.edit', $todo->id) }}" class="btn btn-primary" role="button" style="width: 40%">
-                <i class="far fa-edit"></i> 编辑
-              </a>
+              @can('edit', $todo)
+                <a href="{{ route('todo.edit', $todo->id) }}" class="btn btn-primary" role="button" style="width: 40%">
+                  <i class="far fa-edit"></i> 编辑
+                </a>
+              @endcan
               <form action="{{ route('todo.destroy', $todo->id) }}" method="post"
                     style="display: inline-block; width: 40%"
                     onsubmit="return confirm('您确定要删除吗？');">

@@ -14,9 +14,11 @@
             <a href="{{ route('todo.show', $topic->id) }}" title="{{ $topic->title }}">
               {{ $topic->title }}
             </a>
-            <a class="float-right" href="#" onclick="checkDone({{ $topic->id  }})">
-              <input type="checkbox" @if ($topic->status) checked disabled @endif  id="checkbox_{{ $topic->id  }}">
-            </a>
+            @can('update', $topic)
+              <a class="float-right" href="#" onclick="checkDone({{ $topic->id  }})">
+                <input type="checkbox" @if ($topic->status) checked disabled @endif  id="checkbox_{{ $topic->id  }}">
+              </a>
+            @endcan
           </div>
 
           <small class="media-body meta text-secondary">
