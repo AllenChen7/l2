@@ -38,12 +38,12 @@
           <div class="topic-body mt-4 mb-4">
             <div class="form-group">
               <label for="name-field">期望开始时间</label>
-              <input class="form-control" type="text" readonly name="plan_start_time" id='plan_start_time' value="{{ old('plan_start_time', $todo->plan_start_time ) }}" />
+              <input class="form-control" type="text" readonly name="plan_start_time" id='plan_start_time' value="{{ old('plan_start_time', $todo->getPlanStartTimeStr($todo->plan_start_time) ) }}" />
             </div>
 
             <div class="form-group">
               <label for="name-field">期望结束时间</label>
-              <input class="form-control" type="text" readonly name="plan_end_time" id="plan_end_time" value="{{ old('plan_end_time', $todo->plan_end_time ) }}"/>
+              <input class="form-control" type="text" readonly name="plan_end_time" id="plan_end_time" value="{{ old('plan_end_time', $todo->getPlanEndTimeStr($todo->plan_end_time) ) }}"/>
             </div>
 
             <div class="form-group">

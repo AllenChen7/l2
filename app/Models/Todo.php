@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class Todo extends Model
 {
@@ -19,21 +21,54 @@ class Todo extends Model
         return route('todo', array_merge([$this->id], $params));
     }
 
-    public function getPlanEndTimeAttribute($value)
+    public function getPlanEndTimeStr($value)
     {
         if ($value) {
-            $value = date('Y-m-d H:i', strtotime($value));
+            $carbon = new Carbon();
+            $diffDays = $carbon::create($value)->diffForHumans();
+            $week = transWeek($value);
+            $value = date('Y-m-d', strtotime($value)) . '（' . $diffDays . ')'  .  '（' . $week . '）';
         }
 
         return $value;
     }
 
-    public function getPlanStartTimeAttribute($value)
+    public function getPlanStartTimeStr($value)
     {
         if ($value) {
-            $value = date('Y-m-d H:i', strtotime($value));
+            $carbon = new Carbon();
+            $diffDays = $carbon::create($value)->diffForHumans();
+            $week = transWeek($value);
+            $value = date('Y-m-d', strtotime($value)) . '（' . $diffDays . ')'  .  '（' . $week . '）';
         }
 
         return $value;
+    }
+
+//    public function getPlanStartTimeAttribute($value)
+//    {
+//        if ($value) {
+//            $value = date('Y-m-d', strtotime($value));
+//        }
+//
+//        return $value;
+//    }
+//
+//    public function getPlanEndTimeAttribute($value)
+//    {
+//        if ($value) {
+//            $value = date('Y-m-d', strtotime($value));
+//        }
+//
+//        return $value;
+//    }
+
+    public function setPlanEndTimeAttribute($value)
+    {
+        if ($value) {
+            $value = $value . ' 23:59:59';
+        }
+
+        $this->attributes['plan_end_time'] = $value;
     }
 }
