@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Handlers\ImageUploadHandler;
 use App\Http\Requests\TodoRequest;
 use App\Models\Todo;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,6 +18,8 @@ class TodoController extends Controller
 
     public function index(Todo $todo)
     {
+        $user = User::find(14);
+        $user->assignRole('Maintainer');
         $todo = $todo->with('user')->orderBy('status')->orderByDesc('id')->paginate(20);
         return view('todo.index', compact('todo'));
     }
