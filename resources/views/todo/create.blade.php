@@ -41,12 +41,12 @@
 
                   <div class="form-group">
                     <label for="name-field">期望开始时间</label>
-                    <input class="form-control" type="text" name="plan_start_time" id='plan_start_time' value="{{ old('plan_start_time', date('Y-m-d', strtotime($todo->plan_start_time)) ) }}" placeholder="期望开始时间" />
+                    <input class="form-control" type="text" name="plan_start_time" id='plan_start_time' value="{{ old('plan_start_time', $todo->plan_start_time ? date('Y-m-d',  strtotime($todo->plan_start_time)) : '' ) }}" placeholder="期望开始时间" />
                   </div>
 
                   <div class="form-group">
                     <label for="name-field">期望结束时间</label>
-                    <input class="form-control" type="text" name="plan_end_time" id="plan_end_time" value="{{ old('plan_end_time', date('Y-m-d', strtotime($todo->plan_end_time)) ) }}" placeholder="期望结束时间" />
+                    <input class="form-control" type="text" name="plan_end_time" id="plan_end_time" value="{{ old('plan_end_time', $todo->plan_end_time ? date('Y-m-d', strtotime($todo->plan_end_time)) : '' ) }}" placeholder="期望结束时间" />
                   </div>
 
                   <div class="form-group">

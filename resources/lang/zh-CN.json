@@ -4,7 +4,7 @@
   "Before proceeding, please check your email for a verification link.": "在继续之前请先验证您的 E-mail。",
   "click here to request another": "点击重新发送 E-mail",
   "Confirm Password": "确认密码",
-  "E-Mail Address": "E-mail",
+  "E-Mail Address": "邮 箱",
   "Forbidden": "访问被拒绝",
   "Forgot Your Password?": "忘记密码？",
   "Go Home": "回首页",
@@ -16,7 +16,7 @@
   "Invalid signature.": "签名无效",
   "Login": "登录",
   "Logout": "注销",
-  "Name": "姓名",
+  "Name": "昵称",
   "Not Found": "页面不存在",
   "Oh no": "不好了",
   "Page Expired": "页面会话已超时",
@@ -42,5 +42,6 @@
   "We won't ask for your password again for a few hours.": "确认完成后，接下来几个小时内您不需再输入密码。",
   "You are receiving this email because we received a password reset request for your account.": "您收到此电子邮件是因为我们收到了您帐户的密码重设请求。",
   "Your email address is not verified.": "您的电子邮件尚未验证通过",
-  "Whoops!": "哎呦！"
+  "Whoops!": "哎呦！",
+  "Go Register": "去注册"
 }

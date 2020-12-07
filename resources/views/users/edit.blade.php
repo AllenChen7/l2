@@ -19,11 +19,11 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             @include('shared._error')
             <div class="form-group">
-              <label for="name-field">用户名</label>
+              <label for="name-field">{{ __('Name') }}</label>
               <input class="form-control" type="text" name="name" id="name-field" value="{{ old('name', $user->name) }}" />
             </div>
             <div class="form-group">
-              <label for="email-field">邮 箱</label>
+              <label for="email-field">{{ __('E-Mail Address') }}</label>
               <input class="form-control" type="text" name="email" id="email-field" value="{{ old('email', $user->email) }}" />
             </div>
             <div class="form-group">
