@@ -73,11 +73,11 @@
                 </a>
               @endcan
               <form action="{{ route('todo.destroy', $todo->id) }}" method="post"
-                    style="display: inline-block; width: 40%"
+                    style="display: inline-block; width: {{$todo->status ? '100%' : '40%'}}"
                     onsubmit="return confirm('您确定要删除吗？');">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
-                <button type="submit" class="btn btn-warning" style="width: 100%; margin-left: 50px">
+                <button type="submit" class="btn btn-warning" style="{{ $todo->status ? 'width: 100%;' : 'width: 100%; margin-left: 50px' }}">
                   <i class="far fa-trash-alt"></i> 删除
                 </button>
               </form>

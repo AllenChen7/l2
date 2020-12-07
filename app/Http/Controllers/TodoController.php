@@ -17,7 +17,7 @@ class TodoController extends Controller
 
     public function index(Todo $todo)
     {
-        $todo = $todo->with('user')->orderByDesc('id')->paginate(20);
+        $todo = $todo->with('user')->orderBy('status')->orderByDesc('id')->paginate(20);
         return view('todo.index', compact('todo'));
     }
 
