@@ -18,8 +18,6 @@ class TodoController extends Controller
 
     public function index(Todo $todo)
     {
-        $user = User::find(14);
-        $user->assignRole('Maintainer');
         $todo = $todo->with('user')->orderBy('status')->orderByDesc('id')->paginate(20);
         return view('todo.index', compact('todo'));
     }
