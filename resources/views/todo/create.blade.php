@@ -36,7 +36,7 @@
 
                   <div class="form-group">
                     <label for="name-field">TODO</label>
-                    <input class="form-control" type="text" name="title" value="{{ old('title', $todo->title ) }}" placeholder="请填写 TODO" required />
+                    <input class="form-control" type="text" maxlength="100" name="title" value="{{ old('title', $todo->title ) }}" placeholder="请填写 TODO" required />
                   </div>
 
                   <div class="form-group">
@@ -51,7 +51,7 @@
 
                   <div class="form-group">
                     <label for="name-field">期望去往地点</label>
-                    <input class="form-control" type="text" id="keyword" name="address" value="{{ old('address', $todo->address ) }}" placeholder="请输入关键字：(选定后搜索)" />
+                    <input class="form-control" type="text" id="keyword" maxlength="100" name="address" value="{{ old('address', $todo->address ) }}" placeholder="请输入关键字：(选定后搜索)" />
                   </div>
 
                   <div class="form-group">
@@ -73,7 +73,7 @@
 
                   <div class="form-group">
                     <label for="name-field">备注</label>
-                    <textarea name="desc" class="form-control" rows="6" placeholder="备注">{{ old('desc', $todo->desc ) }}</textarea>
+                    <textarea name="desc" class="form-control" rows="6" maxlength="200" placeholder="备注">{{ old('desc', $todo->desc ) }}</textarea>
                   </div>
 
                   <div class="well well-sm">
