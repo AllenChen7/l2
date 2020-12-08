@@ -5,7 +5,7 @@ namespace App\Policies;
 use App\Models\Todo;
 use App\Models\User;
 
-class TodoPolicy
+class TodoPolicy extends Policy
 {
     public function update(User $user, Todo $topic)
     {
