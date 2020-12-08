@@ -23,7 +23,7 @@
 
           <div class="media-heading mt-0 mb-1">
             <small class="media-body meta text-secondary">
-              <span> 期待结束时间： </span>{{ $topic->plan_end_time ? \Carbon\Carbon::create($topic->plan_end_time)->diffForHumans() : '长期'}}
+              <span> 期望结束时间： </span>{{ $topic->plan_end_time ? \Carbon\Carbon::create($topic->plan_end_time)->diffForHumans() : '长期'}}
             </small>
           </div>
 
