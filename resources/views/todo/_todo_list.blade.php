@@ -23,7 +23,7 @@
 
           <div class="media-heading mt-0 mb-1">
             <small class="media-body meta text-secondary">
-              <span> 期望结束时间： </span>{{ $topic->plan_end_time ? \Carbon\Carbon::create($topic->plan_end_time)->diffForHumans() : '长期'}}
+              <span> 期望开始时间： </span>{{ $topic->plan_start_time ? \Carbon\Carbon::create($topic->plan_start_time)->diffForHumans() : '长期'}}
             </small>
           </div>
 
@@ -31,7 +31,7 @@
             <span> • </span>
             <a class="text-secondary" href="{{ route('users.show', [$topic->user_id]) }}" title="{{ $topic->user->name }}">
               <i class="far fa-user"></i>
-              {{ $topic->user->name }}
+              {{ \Illuminate\Support\Str::of($topic->user->name)->limit(10) }}
             </a>
             <span> • </span>
             <i class="far fa-clock"></i>
