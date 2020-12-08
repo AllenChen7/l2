@@ -23,6 +23,8 @@ class Todo extends Model
 
     public function getPlanEndTimeStr($value)
     {
+        // 获取天气
+        $weather = getWeather($this->address, $this->plan_end_time);
         if ($value) {
             $carbon = new Carbon();
             $diffDays = $carbon::create($value)->diffForHumans();

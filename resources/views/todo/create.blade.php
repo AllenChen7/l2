@@ -73,7 +73,7 @@
 
                   <div class="form-group">
                     <label for="name-field">备注</label>
-                    <textarea name="desc" class="form-control" rows="6" maxlength="500" placeholder="备注">{{ old('desc', $todo->desc ) }}</textarea>
+                    <textarea name="desc" class="form-control" rows="6" maxlength="5" placeholder="备注">{{ old('desc', $todo->desc ) }}</textarea>
                   </div>
 
                   <div class="well well-sm">
@@ -129,15 +129,7 @@
         input: "keyword"//使用联想输入的input的id
       };
       autocomplete= new AMap.Autocomplete(autoOptions);
-      // var placeSearch = new AMap.PlaceSearch({
-      //   city:'北京',
-      //   map:map
-      // })
       AMap.event.addListener(autocomplete, "select", function(e){
-        //TODO 针对选中的poi实现自己的功能
-        // placeSearch.setCity(e.poi.adcode);
-        // placeSearch.search(e.poi.name)
-        // console.log(e.poi.location)
         var longitude = e.poi.location.lng
         var latitude = e.poi.location.lat
 
@@ -150,6 +142,7 @@
                   + '" role="button">在地图中打开</a>';
         $('#dtCity').html(str)
       });
+
     });
 
     // 绑定事件

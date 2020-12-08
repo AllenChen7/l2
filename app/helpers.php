@@ -71,3 +71,22 @@ function transWeek($value = '')
 
     return $weekArr[$str];
 }
+
+function getWeather($address = '', $day = '')
+{
+    $str = '';
+    \Illuminate\Support\Facades\Log::info('address', [
+        'address' => $address,
+        'day' => $day
+    ]);
+
+    if (!$address) {
+        $req = new \Illuminate\Http\Request();
+        $ip = $req->getClientIp();
+        $address = \Zhuzhichao\IpLocationZh\Ip::find($req->getClientIp());
+        \Illuminate\Support\Facades\Log::info('ip', [
+            'ip' => $ip,
+            'address' => $address
+        ]);
+    }
+}
