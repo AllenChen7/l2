@@ -18,8 +18,9 @@ class TodoController extends Controller
 
     public function index(Todo $todo)
     {
+        $user = \auth()->user();
         $todo = $todo->with('user')->orderBy('status')->orderByDesc('id')->paginate(20);
-        return view('todo.index', compact('todo'));
+        return view('todo.index', compact('todo', 'user'));
     }
 
     public function store(TodoRequest $request, Todo $todo, ImageUploadHandler $uploader)
