@@ -12,7 +12,7 @@
 
           <div class="media-heading mt-0 mb-1">
             <a href="{{ route('todo.show', $topic->id) }}" title="{{ $topic->title }}">
-              {{ $topic->title }}
+              {{ \Illuminate\Support\Str::of($topic->title)->limit(20) }}
             </a>
             @can('update', $topic)
               <a class="float-right" href="#" onclick="checkDone({{ $topic->id  }})">
@@ -21,9 +21,13 @@
             @endcan
           </div>
 
+          <div class="media-heading mt-0 mb-1">
+            <small class="media-body meta text-secondary">
+              <span> 期待结束时间： </span>{{ $topic->plan_end_time ? \Carbon\Carbon::create($topic->plan_end_time)->diffForHumans() : '长期'}}
+            </small>
+          </div>
+
           <small class="media-body meta text-secondary">
-
-
             <span> • </span>
             <a class="text-secondary" href="{{ route('users.show', [$topic->user_id]) }}" title="{{ $topic->user->name }}">
               <i class="far fa-user"></i>
