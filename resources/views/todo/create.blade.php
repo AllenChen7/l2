@@ -73,7 +73,7 @@
 
                   <div class="form-group">
                     <label for="name-field">备注</label>
-                    <textarea name="desc" class="form-control" rows="6" maxlength="200" placeholder="备注">{{ old('desc', $todo->desc ) }}</textarea>
+                    <textarea name="desc" class="form-control" rows="6" maxlength="500" placeholder="备注">{{ old('desc', $todo->desc ) }}</textarea>
                   </div>
 
                   <div class="well well-sm">
