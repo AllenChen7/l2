@@ -8,7 +8,7 @@
         </a>
 
         <div class="reply-content text-secondary mt-2 mb-2">
-          {!! $todo->desc !!}
+          {{ $todo->desc }}
         </div>
 
         <div class="text-secondary" style="font-size:0.9em;">

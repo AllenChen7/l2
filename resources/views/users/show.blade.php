@@ -42,9 +42,9 @@
             </li>
           </ul>
           @if (if_query('tab', 'replies'))
-            @include('users._todos_done', ['todos' => $user->todo()->where(['status' => 1])->paginate(5)])
+            @include('users._todos_done', ['todos' => $user->todo()->where(['status' => 1])->orderByDesc('id')->paginate(5)])
           @else
-            @include('users._todos', ['todos' => $user->todo()->where(['status' => 0])->paginate(5)])
+            @include('users._todos', ['todos' => $user->todo()->where(['status' => 0])->orderByDesc('id')->paginate(5)])
           @endif
         </div>
       </div>
