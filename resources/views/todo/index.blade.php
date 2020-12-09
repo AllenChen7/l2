@@ -21,12 +21,12 @@
           <ul class="nav nav-tabs">
             <li class="nav-item">
               <a class="nav-link bg-transparent {{ active_class(if_query('tab', null)) }}" href="{{ Request::url() }}?tab=">
-                will
+                计划
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link bg-transparent {{ active_class(if_query('tab', 'always')) }}" href="{{ Request::url() }}?tab=always">
-                always
+                日常
               </a>
             </li>
           </ul>

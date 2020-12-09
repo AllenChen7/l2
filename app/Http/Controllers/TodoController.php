@@ -16,10 +16,10 @@ class TodoController extends Controller
         $this->middleware('auth', ['except' => []]);
     }
 
-    public function index(Todo $todo)
+    public function index(Todo $todo, Request $request)
     {
         $user = \auth()->user();
-        $todo = $todo->with('user')->where([
+        $todo = $todo->with('user')->withCate($request->tab)->where([
             'status' => 0
         ])->orderBy('status')->orderByDesc('id')->paginate(20);
         return view('todo.index', compact('todo', 'user'));

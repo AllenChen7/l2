@@ -40,6 +40,18 @@
                   </div>
 
                   <div class="form-group">
+                    <label for="name-field">请选择分类</label>
+                    <select class="form-control" name="cate" required>
+                      <option value="" hidden disabled {{ $todo->id ? '' : 'selected' }}>请选择分类</option>
+                      @foreach ($todo->cateArr() as $key => $value)
+                        <option value="{{ $key }}" {{ $todo->cate == $key ? 'selected' : '' }}>
+                          {{ $value }}
+                        </option>
+                      @endforeach
+                    </select>
+                  </div>
+
+                  <div class="form-group">
                     <label for="name-field">期望开始时间</label>
                     <input class="form-control" type="text" name="plan_start_time" id='plan_start_time' value="{{ old('plan_start_time', $todo->plan_start_time ? date('Y-m-d',  strtotime($todo->plan_start_time)) : '' ) }}" placeholder="期望开始时间" />
                   </div>

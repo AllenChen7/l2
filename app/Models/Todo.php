@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 class Todo extends Model
 {
     protected $fillable = ['title', 'desc', 'user_id', 'endTime', 'status', 'address',
-        'latitude', 'longitude', 'plan_end_time', 'plan_start_time', 'image'];
+        'latitude', 'longitude', 'plan_end_time', 'plan_start_time', 'image', 'cate'];
 
     public function user()
     {
@@ -72,5 +72,31 @@ class Todo extends Model
         }
 
         $this->attributes['plan_end_time'] = $value;
+    }
+
+    public function cateArr()
+    {
+        return [
+            1 => '计划',
+            2 => '日常'
+        ];
+    }
+
+    public function scopeWithCate($query, $order)
+    {
+        // 不同的排序，使用不同的数据读取逻辑
+        switch ($order) {
+            case 'always':
+                $query->where([
+                    'cate' => 2
+                ]);
+                break;
+
+            default:
+                $query->where([
+                    'cate' => 1
+                ]);
+                break;
+        }
     }
 }

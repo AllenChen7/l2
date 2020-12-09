@@ -37,6 +37,10 @@
 
           <div class="topic-body mt-4 mb-4">
             <div class="form-group">
+              <label for="name-field">分类</label>
+              <input class="form-control" type="text" readonly name="cate" id='cate' value="{{ old('cate', $todo->cateArr()[$todo->cate] ) }}" />
+            </div>
+            <div class="form-group">
               <label for="name-field">期望开始时间</label>
               <input class="form-control" type="text" readonly name="plan_start_time" id='plan_start_time' value="{{ old('plan_start_time', $todo->getPlanStartTimeStr($todo->plan_start_time) ) }}" />
             </div>

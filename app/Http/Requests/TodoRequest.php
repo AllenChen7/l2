@@ -19,6 +19,7 @@ class TodoRequest extends Request
                     'desc'        => 'nullable|min:3|max:500',
                     'plan_start_time' => 'nullable',
                     'plan_end_time' => 'nullable|after_or_equal:plan_start_time',
+                    'cate'      => 'required'
                 ];
             }
             case 'GET':
@@ -50,6 +51,7 @@ class TodoRequest extends Request
         return [
             'plan_start_time' => '期望开始时间',
             'plan_end_time' => '期望结束时间',
+            'cate'  => '分类'
         ];
     }
 }
