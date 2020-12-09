@@ -75,9 +75,22 @@ function transWeek($value = '')
 function getWeather($address = '', $day = '')
 {
     $str = '';
+    if (!$day) {
+        $day = \Carbon\Carbon::now();
+    } else {
+        $day = \Carbon\Carbon::create($day);
+    }
+
+    $diff = $day->diffInDays($day);
+
+    if ($diff > 7) {
+        return $str;
+    }
+
     \Illuminate\Support\Facades\Log::info('address', [
         'address' => $address,
-        'day' => $day
+        'day' => $day,
+        'diff' => $diff
     ]);
 
     if (!$address) {
@@ -89,4 +102,14 @@ function getWeather($address = '', $day = '')
             'address' => $address
         ]);
     }
+
+    if (!$address) {
+        return $str;
+    }
+
+    $weather = app('weather')->getLiveWeather($address);
+
+    \Illuminate\Support\Facades\Log::info('weather', [
+        'weather' => $weather
+    ]);
 }
