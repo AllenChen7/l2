@@ -96,7 +96,7 @@ function getWeather($address = '', $day = '')
     if (!$address) {
         $req = new \Illuminate\Http\Request();
         $ip = $req->getClientIp();
-        $address = \Zhuzhichao\IpLocationZh\Ip::find($req->getClientIp());
+        $address = \Zhuzhichao\IpLocationZh\Ip::find($ip);
         \Illuminate\Support\Facades\Log::info('ip', [
             'ip' => $ip,
             'address' => $address
@@ -107,7 +107,7 @@ function getWeather($address = '', $day = '')
         return $str;
     }
 
-    $weather = app('weather')->getLiveWeather($address);
+    $weather = app('weather')->getForecastsWeather($address);
 
     \Illuminate\Support\Facades\Log::info('weather', [
         'weather' => $weather

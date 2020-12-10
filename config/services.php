@@ -35,6 +35,6 @@ return [
         'key'   => env('BAIDU_TRANSLATE_KEY'),
     ],
     'weather' => [
-        'key' => env('GD_KEY'),
+        'key' => env('GD_WEB_KEY'),
     ],
 ];

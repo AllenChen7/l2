@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 class Todo extends Model
 {
     protected $fillable = ['title', 'desc', 'user_id', 'endTime', 'status', 'address',
-        'latitude', 'longitude', 'plan_end_time', 'plan_start_time', 'image', 'cate'];
+        'latitude', 'longitude', 'plan_end_time', 'plan_start_time', 'image', 'cate', 'adcode'];
 
     public function user()
     {
@@ -24,7 +24,7 @@ class Todo extends Model
     public function getPlanEndTimeStr($value)
     {
         // 获取天气
-        $weather = getWeather($this->address, $this->plan_end_time);
+        $weather = getWeather($this->adcode, $this->plan_end_time);
         if ($value) {
             $carbon = new Carbon();
             $diffDays = $carbon::create($value)->diffForHumans();

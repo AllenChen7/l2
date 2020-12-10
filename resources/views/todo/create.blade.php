@@ -70,6 +70,7 @@
 {{--                    <label for="name-field">请确认地址</label>--}}
                     <input type="hidden" name="longitude" id="hlongitude" value="{{ old('longitude', $todo->longitude ) }}">
                     <input type="hidden" name="latitude" id="hlatitude" value="{{ old('latitude', $todo->latitude ) }}">
+                    <input type="hidden" name="adcode" id="adcode" value="{{ old('adcode', $todo->adcode ) }}">
 {{--                    <div id="mapContainer" style="height: 200px; position: unset;"></div>--}}
                     <div id="dtCity"></div>
                   </div>
@@ -142,11 +143,14 @@
       };
       autocomplete= new AMap.Autocomplete(autoOptions);
       AMap.event.addListener(autocomplete, "select", function(e){
+        console.log(e)
         var longitude = e.poi.location.lng
         var latitude = e.poi.location.lat
+        var adcode = e.poi.adcode
 
         $('#hlongitude').val(longitude)
         $('#hlatitude').val(latitude)
+        $('#adcode').val(adcode)
 
         var str = '<a class="btn btn-primary" style="width: 100%" href="https://uri.amap.com/marker?position=' + longitude
                   + ',' + latitude
