@@ -61,7 +61,7 @@
               </a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" id="logout" href="#">
-                <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('您确定要退出吗？');">
+                <form action="{{ route('logout') }}" method="POST" onsubmit="checkLogout()">
                   {{ csrf_field() }}
                   <button class="btn btn-block btn-danger" type="submit" name="button">退出</button>
                 </form>
@@ -73,3 +73,16 @@
     </div>
   </div>
 </nav>
+
+<script>
+  function checkLogout() {
+    $.confirm("您确定要退出吗？", function() {
+      //点击确认后的回调函数
+      return true;
+    }, function() {
+      //点击取消后的回调函数
+      $('#checkbox_' + id).removeAttr('checked')
+      $.toast("已取消", "cancel");
+    });
+  }
+</script>

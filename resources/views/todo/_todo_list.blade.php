@@ -64,7 +64,6 @@
 
 <script>
   function checkDone(id) {
-    console.log(id)
     $.confirm("确认已完成当前 TODO", function() {
       //点击确认后的回调函数
       var data = {
