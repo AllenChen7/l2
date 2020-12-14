@@ -17,6 +17,13 @@
           </ul>
         </div>
 
+        <div class="weui-cell">
+          <div class="weui-cell__hd"><label for="name" class="weui-label">姓名</label></div>
+          <div class="weui-cell__bd">
+            <input class="weui-input" id="userSelect" type="text" value="">
+          </div>
+        </div>
+
         <div class="card-body">
           <ul class="nav nav-tabs">
             <li class="nav-item">
