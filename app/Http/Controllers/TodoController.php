@@ -22,7 +22,9 @@ class TodoController extends Controller
         $todo = $todo->with('user')->withCate($request->tab)->where([
             'status' => 0
         ])->orderBy('status')->orderByDesc('id')->paginate(20);
-        return view('todo.index', compact('todo', 'user'));
+        $ids = $request->input('ids', '');
+        $usernames = $request->input('usernames', '');
+        return view('todo.index', compact('todo', 'user', 'ids', 'usernames'));
     }
 
     public function store(TodoRequest $request, Todo $todo, ImageUploadHandler $uploader)

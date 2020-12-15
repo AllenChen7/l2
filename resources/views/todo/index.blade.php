@@ -20,7 +20,7 @@
         <div class="weui-cell">
           <div class="weui-cell__hd"><label for="name" class="weui-label">姓名</label></div>
           <div class="weui-cell__bd">
-            <input class="weui-input" id="userSelect" type="text" value="">
+            <input class="weui-input" id="userSelect" type="text" value="{{ old('username', $usernames ) }}" data-values="{{ old('ids', $ids ) }}">
           </div>
         </div>
 
