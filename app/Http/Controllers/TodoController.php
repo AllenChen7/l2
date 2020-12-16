@@ -18,13 +18,21 @@ class TodoController extends Controller
 
     public function index(Todo $todo, Request $request)
     {
+        $ids = $request->input('ids', '');
         $user = \auth()->user();
         $todo = $todo->with('user')->withCate($request->tab)->where([
             'status' => 0
-        ])->orderBy('status')->orderByDesc('id')->paginate(20);
-        $ids = $request->input('ids', '');
+        ]);
+
+        if ($ids) {
+            $idArr = explode(',', $ids);
+            $todo = $todo->whereIn('user_id', $idArr);
+        }
+
+        $todo = $todo->orderBy('status')->orderByDesc('id')->paginate(20);
+        $userData = User::select(['id as value', 'name as title'])->orderByDesc('id')->get()->toArray();
         $usernames = $request->input('usernames', '');
-        return view('todo.index', compact('todo', 'user', 'ids', 'usernames'));
+        return view('todo.index', compact('todo', 'user', 'ids', 'usernames', 'userData'));
     }
 
     public function store(TodoRequest $request, Todo $todo, ImageUploadHandler $uploader)

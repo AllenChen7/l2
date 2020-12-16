@@ -41,7 +41,7 @@
 
         <div class="card-body">
           {{-- 话题列表 --}}
-          @include('todo._todo_list', ['topics' => $todo])
+          @include('todo._todo_list', ['topics' => $todo, 'userData' => $userData])
           {{-- 分页 --}}
           <div class="mt-5">
             {!! $todo->appends(Request::except('page'))->render() !!}

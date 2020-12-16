@@ -62,25 +62,15 @@
   <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
   <script>
     $("#userSelect").select({
-      title: "选择职业",
+      title: "选择用户",
       multi: true,
       items: [
+        @foreach($userData as $user)
         {
-          title: "画画",
-          value: 1
+          title: "{{$user['title']}}",
+          value: {{$user['value']}}
         },
-        {
-          title: "打球",
-          value: 2
-        },
-        {
-          title: "唱歌",
-          value: 3
-        },
-        {
-          title: "游泳",
-          value: 4
-        },
+        @endforeach
       ],
       onChange: function () {
         console.log(111)
