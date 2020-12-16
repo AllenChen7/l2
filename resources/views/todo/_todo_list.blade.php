@@ -73,14 +73,11 @@
         @endforeach
       ],
       onChange: function () {
-        console.log(111)
       },
       onClose: function () {
-        console.log(222)
         var usernames = $('#userSelect').val()
-        console.log(usernames, 'usernames')
         var ids = $('#userSelect').data('values')
-        window.location.href = '/todo?ids=' + ids + '&usernames=' + usernames;
+        window.location.href = '/todo?ids=' + ids + '&usernames=' + usernames + '&tab=' + "{{$tab}}";
       }
     });
   </script>

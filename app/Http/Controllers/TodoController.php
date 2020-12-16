@@ -20,7 +20,8 @@ class TodoController extends Controller
     {
         $ids = $request->input('ids', '');
         $user = \auth()->user();
-        $todo = $todo->with('user')->withCate($request->tab)->where([
+        $tab  = $request->tab;
+        $todo = $todo->with('user')->withCate($tab)->where([
             'status' => 0
         ]);
 
@@ -32,7 +33,7 @@ class TodoController extends Controller
         $todo = $todo->orderBy('status')->orderByDesc('id')->paginate(20);
         $userData = User::select(['id as value', 'name as title'])->orderByDesc('id')->get()->toArray();
         $usernames = $request->input('usernames', '');
-        return view('todo.index', compact('todo', 'user', 'ids', 'usernames', 'userData'));
+        return view('todo.index', compact('todo', 'user', 'ids', 'usernames', 'userData', 'tab'));
     }
 
     public function store(TodoRequest $request, Todo $todo, ImageUploadHandler $uploader)
