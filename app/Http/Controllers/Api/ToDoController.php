@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Models\Todo;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ToDoController extends ApiController
@@ -13,6 +14,8 @@ class ToDoController extends ApiController
     {
         $ids = $request->input('ids', '');
         $tab  = $request->tab;
+        $page = (int)$request->get('page', 1);
+        $offset = ($page - 1) < 0 ? 0 : ($page - 1) * 20;
         $todo = $todo->with('user')->withCate($tab)->where([
             'status' => 0
         ]);
@@ -22,8 +25,13 @@ class ToDoController extends ApiController
             $todo = $todo->whereIn('user_id', $idArr);
         }
 
-        $todo = $todo->orderBy('status')->orderByDesc('id')->paginate(20);
+        $todo = $todo->orderBy('status')->orderByDesc('id')->limit(20)->offset($offset)->get()->toArray();
 
-        return $this->jsonSuccessResponse($todo);
+        foreach ($todo as &$value) {
+            $value['plan_start_time'] = \Carbon\Carbon::create($value['plan_start_time'])->diffForHumans();
+            $value['plan_end_time'] = \Carbon\Carbon::create($value['plan_end_time'])->diffForHumans();
+        }
+
+        return $this->jsonSuccessResponse(['data' => $todo]);
     }
 }
