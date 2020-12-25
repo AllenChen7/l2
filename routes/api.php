@@ -44,5 +44,14 @@ $api->version('v1', function ($api) {
         $api->post('logout', 'AuthController@logout');
         $api->get('refresh', 'AuthController@refresh');
         $api->get('me', 'AuthController@me');
+        $api->post('todo/add', 'ToDoController@add');
+    });
+
+
+    $api->group([
+        'namespace'  => 'App\Http\Controllers\Api',
+        'middleware' => 'jwt.auth',
+    ], function ($api) {
+        $api->post('todo/add', 'ToDoController@add');
     });
 });

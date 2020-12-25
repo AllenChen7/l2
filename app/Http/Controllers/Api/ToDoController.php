@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ToDoController extends ApiController
 {
@@ -33,5 +34,15 @@ class ToDoController extends ApiController
         }
 
         return $this->jsonSuccessResponse(['data' => $todo]);
+    }
+
+    public function add(Request $request)
+    {
+        
+        Log::info('res', [
+            'res' => $request->all()
+        ]);
+
+        return $this->jsonSuccessResponse(['data' => '123']);
     }
 }
