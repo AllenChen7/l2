@@ -33,6 +33,7 @@ $api->version('v1', function ($api) {
         $api->get('yy', 'TestController@yy');
         $api->post('auth/login', 'AuthController@login');
         $api->get('todo/list', 'ToDoController@index');
+        $api->post('upload/image', 'UploadController@image');
     });
 
     $api->group([
