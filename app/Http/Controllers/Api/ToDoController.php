@@ -15,7 +15,8 @@ class ToDoController extends ApiController
         $ids = $request->input('ids', '');
         $tab  = $request->tab;
         $page = (int)$request->get('page', 1);
-        $offset = ($page - 1) < 0 ? 0 : ($page - 1) * 20;
+        $limit = 10;
+        $offset = ($page - 1) < 0 ? 0 : ($page - 1) * $limit;
         $todo = $todo->with('user')->withCate($tab)->where([
             'status' => 0
         ]);
@@ -25,7 +26,7 @@ class ToDoController extends ApiController
             $todo = $todo->whereIn('user_id', $idArr);
         }
 
-        $todo = $todo->orderBy('status')->orderByDesc('id')->limit(20)->offset($offset)->get()->toArray();
+        $todo = $todo->orderBy('status')->orderByDesc('id')->limit($limit)->offset($offset)->get()->toArray();
 
         foreach ($todo as &$value) {
             $value['plan_start_time'] = \Carbon\Carbon::create($value['plan_start_time'])->diffForHumans();
