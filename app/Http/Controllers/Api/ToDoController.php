@@ -13,11 +13,13 @@ class ToDoController extends ApiController
     public function index(Request $request, Todo $todo)
     {
         $ids = $request->input('ids', '');
-        $tab  = $request->tab;
+//        $tab  = $request->tab;
         $page = (int)$request->get('page', 1);
         $limit = 10;
         $offset = ($page - 1) < 0 ? 0 : ($page - 1) * $limit;
-        $todo = $todo->with('user')->withCate($tab)->where([
+        $todo = $todo->with('user')
+//            ->withCate($tab)
+            ->where([
             'status' => 0
         ]);
 
@@ -38,7 +40,7 @@ class ToDoController extends ApiController
 
     public function add(Request $request)
     {
-        
+
         Log::info('res', [
             'res' => $request->all()
         ]);
