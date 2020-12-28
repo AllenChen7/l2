@@ -53,5 +53,7 @@ $api->version('v1', function ($api) {
         'middleware' => 'jwt.auth',
     ], function ($api) {
         $api->post('todo/add', 'ToDoController@add');
+        $api->get('todo/info', 'ToDoController@getInfo');
+        $api->post('todo/done', 'ToDoController@done');
     });
 });

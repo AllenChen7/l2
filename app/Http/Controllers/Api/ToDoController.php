@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class ToDoController extends ApiController
@@ -31,20 +32,72 @@ class ToDoController extends ApiController
         $todo = $todo->orderBy('status')->orderByDesc('id')->limit($limit)->offset($offset)->get()->toArray();
 
         foreach ($todo as &$value) {
-            $value['plan_start_time'] = \Carbon\Carbon::create($value['plan_start_time'])->diffForHumans();
-            $value['plan_end_time'] = \Carbon\Carbon::create($value['plan_end_time'])->diffForHumans();
+            $value['plan_start_time'] = $value['plan_start_time'] ? \Carbon\Carbon::create($value['plan_start_time'])->diffForHumans() : '';
+            $value['plan_end_time'] = $value['plan_end_time'] ? \Carbon\Carbon::create($value['plan_end_time'])->diffForHumans() : '';
         }
 
-        return $this->jsonSuccessResponse(['data' => $todo]);
+        return $this->jsonSuccessResponse($todo);
     }
 
-    public function add(Request $request)
+    public function add(Request $request, Todo $todo)
     {
-
         Log::info('res', [
             'res' => $request->all()
         ]);
+        $data = $request->all();
+        $todo->fill($data);
+        $todo->user_id = Auth::id();
 
-        return $this->jsonSuccessResponse(['data' => '123']);
+        $res = $todo->save();
+
+        if ($res) {
+            return $this->jsonSuccessResponse();
+        }
+
+        return $this->jsonErrorResponse();
+    }
+
+    public function getInfo(Request $request)
+    {
+        $id = $request->get('id');
+
+        if (!$id) {
+            return $this->jsonErrorResponse('数据不存在');
+        }
+
+        $data = Todo::where([
+            'id' => $id
+        ])->with('user')->first();
+
+        if ($data) {
+            $nowId = Auth::id();
+            $doneFlag = 0;
+
+            if ($nowId == $data['user_id'] && !$data['status']) {
+                $doneFlag = 1;
+            }
+
+            $data['doneFlag'] = $doneFlag;
+            $data['cate'] = $data['cate'] == 1 ? '计划' : '日常';
+            return $this->jsonSuccessResponse($data);
+        }
+
+        return $this->jsonErrorResponse('数据不存在');
+    }
+
+    public function done(Request $request)
+    {
+        $todo = Todo::find($request->post('id'));
+
+        if ($todo) {
+            $todo->status = true;
+            $todo->endTime = time();
+
+            if ($todo->save()) {
+                return $this->jsonSuccessResponse();
+            }
+        }
+
+        return $this->jsonErrorResponse();
     }
 }

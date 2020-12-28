@@ -80,7 +80,7 @@ class TodoController extends Controller
         return redirect()->to('todo')->with('success', 'TODO 修改成功！');
     }
 
-    public function done(Request $request, Todo $todo)
+    public function done(Request $request)
     {
         $todo = Todo::find($request->post('id'));
 
