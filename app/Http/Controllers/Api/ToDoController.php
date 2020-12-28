@@ -35,7 +35,7 @@ class ToDoController extends ApiController
         foreach ($todo as &$value) {
             $value['plan_start_time'] = $value['plan_start_time'] ? \Carbon\Carbon::create($value['plan_start_time'])->diffForHumans() : '';
             $value['plan_end_time'] = $value['plan_end_time'] ? \Carbon\Carbon::create($value['plan_end_time'])->diffForHumans() : '';
-            $value['desc'] = Str::limit($value['desc'], 25);
+            $value['desc'] = Str::limit($value['desc'], 50);
         }
 
         return $this->jsonSuccessResponse($todo);
