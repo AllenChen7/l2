@@ -34,6 +34,8 @@ $api->version('v1', function ($api) {
         $api->post('auth/login', 'AuthController@login');
         $api->get('todo/list', 'ToDoController@index');
         $api->post('upload/image', 'UploadController@image');
+
+        $api->get('wx/mini-login', 'WxController@wxMiniLogin');
     });
 
     $api->group([
