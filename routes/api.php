@@ -47,6 +47,7 @@ $api->version('v1', function ($api) {
         $api->get('refresh', 'AuthController@refresh');
         $api->get('me', 'AuthController@me');
         $api->post('todo/add', 'ToDoController@add');
+        $api->get('mini-user-info', 'WxController@wxMiniUserInfo');
     });
 
 

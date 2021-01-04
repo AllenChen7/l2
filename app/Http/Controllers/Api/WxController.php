@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Log;
 
 class WxController extends ApiController
 {
+    /**
+     * 这里请求成功后应该直接生成 token 的，标识已登录成功
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function wxMiniLogin(Request $request)
     {
         $config = config('wxmini');
@@ -25,5 +30,17 @@ class WxController extends ApiController
         }
 
         return $this->jsonSuccessResponse($user);
+    }
+
+    public function wxMiniUserInfo(Request $request)
+    {
+        $params = $request->post();
+        Log::info('user info', [
+            'user info' => $params
+        ]);
+
+        return $this->jsonSuccessResponse([
+            'p' => $params
+        ]);
     }
 }
