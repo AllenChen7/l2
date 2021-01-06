@@ -36,6 +36,7 @@ $api->version('v1', function ($api) {
         $api->post('upload/image', 'UploadController@image');
 
         $api->get('wx/mini-login', 'WxController@wxMiniLogin');
+        $api->post('/wx/mini-user-info', 'WxController@wxMiniUserInfo');
     });
 
     $api->group([
@@ -47,7 +48,7 @@ $api->version('v1', function ($api) {
         $api->get('refresh', 'AuthController@refresh');
         $api->get('me', 'AuthController@me');
         $api->post('todo/add', 'ToDoController@add');
-        $api->get('mini-user-info', 'WxController@wxMiniUserInfo');
+//        $api->get('mini-user-info', 'WxController@wxMiniUserInfo');
     });
 
 
